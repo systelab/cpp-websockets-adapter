@@ -1,15 +1,19 @@
 #pragma once
 
+#include <memory>
+
+
 namespace systelab { namespace websockets_adapter {
 
 	class IServer;
+	class ServerConfiguration;
 
 	class IServerFactory
 	{
 	public:
-		virtual ~IServerFactory() {};
+		virtual ~IServerFactory() = default;
 
-		virtual std::unique_ptr<IServer> buildServer(bool useWSS) const = 0;
+		virtual std::unique_ptr<IServer> buildServer(const ServerConfiguration&) const = 0;
 	};
 
 }}

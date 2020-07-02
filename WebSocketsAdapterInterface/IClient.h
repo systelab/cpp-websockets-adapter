@@ -1,36 +1,33 @@
-#ifndef _TESTUTILITIES_CLIENT_QUIM_VILA_3101181134_H
-#define _TESTUTILITIES_CLIENT_QUIM_VILA_3101181134_H
+#pragma once
 
-#include <boost/thread.hpp>
+#include <memory>
+#include <stdexcept>
+#include <string>
 
 
 namespace systelab { namespace websockets_adapter {
 
-	class IMessageHandler;
-	class ClientImpl;
+	class IClientMessageHandler;
 
-	class Client
+	class IClient
 	{
 	public:
-		Client(const std::string& name,
-			   const std::string& uri,
-			   IMessageHandler&);
-		virtual ~Client();
+		virtual ~IClient() = default;
 
-		void connect();
-		void disconnect();
-		void sendMessage(const std::string& message);
+		virtual void registerClientMessageHandler(std::unique_ptr<IClientMessageHandler>) = 0;
 
-	private:
-		void runThread();
+		virtual void connect() = 0;
+		virtual void disconnect() = 0;
 
-	private:
-		std::string m_name;
-		std::unique_ptr<ClientImpl> m_impl;
-		IMessageHandler& m_messageHandler;
-		boost::shared_ptr<boost::thread> m_thread;
+		virtual void sendMessageToServer(const std::string& message) = 0;
+
+	public:
+		struct Exception : public std::runtime_error
+		{
+			Exception(const std::string& message)
+				:std::runtime_error(message.c_str())
+			{}
+		};
 	};
 
 }}}
-
-#endif //_TESTUTILITIES_CLIENT_QUIM_VILA_3101181134_H

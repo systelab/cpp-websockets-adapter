@@ -1,31 +1,34 @@
 #pragma once
 
+#include <memory>
+#include <stdexcept>
 #include <string>
+
 
 namespace systelab { namespace websockets_adapter {
 
-	struct ServerException: public std::runtime_error 
-	{
-		ServerException(const std::string& message) : std::runtime_error(message.c_str()) {}
-	};
+	class IServerMessageHandler;
 
 	class IServer
 	{
 	public:
-		struct Credentials
-		{
-			std::string certificate;
-			std::string privateKey;
-			std::string dhParam;
-		};
+		virtual ~IServer() = default;
 
-		virtual ~IServer() {};
+		virtual void registerServerMessageHandler(std::unique_ptr<IServerMessageHandler>) = 0;
 
-		virtual void run(unsigned int port) = 0;
+		virtual bool isRunning() const = 0;
+		virtual void start() = 0;
 		virtual void stop() = 0;
 
-		virtual void pushNotification(const std::string& payload) = 0;
-		virtual void setServerCredentials(const Credentials& credentials) = 0;
+		virtual void sendMessageToAllClients(const std::string& payload) = 0;
+
+	public:
+		struct Exception : public std::runtime_error
+		{
+			Exception(const std::string& message)
+				:std::runtime_error(message.c_str())
+			{}
+		};
 	};
 
 }}
