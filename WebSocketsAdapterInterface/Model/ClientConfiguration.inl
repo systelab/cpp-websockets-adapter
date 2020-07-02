@@ -19,7 +19,7 @@ namespace systelab { namespace websockets_adapter {
 
 	std::string ClientConfiguration::getHostAddress() const
 	{
-		return m_port;
+		return m_hostAddress;
 	}
 
 	unsigned int ClientConfiguration::getPort() const
