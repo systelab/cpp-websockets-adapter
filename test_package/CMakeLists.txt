@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(JSONAdapterPackageTestProject)
+project(WebSocketsAdapterPackageTestProject)
 
 # Configure environment
 set(CMAKE_CXX_STANDARD 14)
@@ -11,13 +11,13 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Find external dependencies
-find_package(JSONAdapterTestUtilities)
+find_package(WebSocketsAdapterTestUtilities)
 
 # Configure test package project
-set(JSON_ADAPTER_PACKAGE_TEST_PROJECT JSONAdapterPackageTest)
-add_executable(${JSON_ADAPTER_PACKAGE_TEST_PROJECT} JSONAdapterExample.cpp)
-target_link_libraries(${JSON_ADAPTER_PACKAGE_TEST_PROJECT} JSONAdapterTestUtilities::JSONAdapterTestUtilities)
+set(WEBSOCKETS_ADAPTER_PACKAGE_TEST_PROJECT WebSocketsAdapterPackageTest)
+add_executable(${WEBSOCKETS_ADAPTER_PACKAGE_TEST_PROJECT} WebSocketsAdapterExample.cpp)
+target_link_libraries(${WEBSOCKETS_ADAPTER_PACKAGE_TEST_PROJECT} WebSocketsAdapterTestUtilities::WebSocketsAdapterTestUtilities)
 
 # Register tests
 enable_testing()
-add_test(NAME JSONAdapterPackageTest COMMAND ${JSON_ADAPTER_PACKAGE_TEST_PROJECT})
+add_test(NAME WebSocketsAdapterPackageTest COMMAND ${WEBSOCKETS_ADAPTER_PACKAGE_TEST_PROJECT})
