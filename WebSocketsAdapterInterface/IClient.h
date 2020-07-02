@@ -30,4 +30,4 @@ namespace systelab { namespace websockets_adapter {
 		};
 	};
 
-}}}
+}}
