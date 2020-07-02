@@ -14,7 +14,7 @@ namespace systelab { namespace websockets_adapter {
 	}
 
 	ServerSecurityConfiguration::ServerSecurityConfiguration(const ServerSecurityConfiguration& other)
-		:m_wssEnabled(other.m_httpsEnabled)
+		:m_wssEnabled(other.m_wssEnabled)
 		,m_serverCertificate(other.m_serverCertificate)
 		,m_serverPrivateKey(other.m_serverPrivateKey)
 		,m_serverDHParam(other.m_serverDHParam)
